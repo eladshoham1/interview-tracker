@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Position" ALTER COLUMN "submissionDate" SET DEFAULT CURRENT_TIMESTAMP;

@@ -1,0 +1,30 @@
+|------------------|                    |---------------------------|                   |---------------------|
+|      Company     |                    |     Position              |                   |      Resume         |
+|------------------|                    |---------------------------|                   |---------------------|
+| id: String       |<------------------o| id: String                | o---------------->| id: String          |
+| name: String     |  company           | title: String             |     resume        | createdAt: DateTime |
+| location: String |                    | description: String|      |                   | filePath: String    |
+|------------------|                    | submissionDate: DateTime  |                   |---------------------|
+                                        | status: ApplicationStatus |          
+                                        | lastUpdatedDate: DateTime |          
+                                        | applicationLink: String   |          
+                                        | recruiter: String         |          
+                                        | companyId: String         |          
+                                        | resumeId: String          |          
+                                        |---------------------------|          
+                                                    ^
+                                                    |                         
+                                                    | interviews              
+                                                    o                         
+                                        |----------------------------|
+                                        |   Interview                |
+                                        |----------------------------|
+                                        | id: String                 |
+                                        | time: DateTime             |
+                                        | status: ApplicationStatus  |
+                                        | statusUpdateDate: DateTime |
+                                        | interviewers: String[]     |
+                                        | location: String           |
+                                        | isRemote: Boolean          |
+                                        | positionId: String         |
+                                        |----------------------------|

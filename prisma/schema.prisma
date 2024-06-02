@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ApplicationStatus {
+  INITIATED
+  PASSED
+  FAILED
+  PENDING_UPDATE
+}
+
+model Resume {
+  id        String     @id @default(uuid())
+  createdAt DateTime   @default(now())
+  filePath  String
+  positions Position[]
+}
+
+model Company {
+  id        String     @id @default(uuid())
+  name      String
+  location  String
+  positions Position[]
+}
+
+model Position {
+  id              String            @id @default(uuid())
+  title           String
+  description     String
+  submissionDate  DateTime          @default(now())
+  status          ApplicationStatus @default(INITIATED)
+  lastUpdatedDate DateTime          @updatedAt
+  applicationLink String
+  recruiter       String
+
+  companyId  String
+  resumeId   String
+  company    Company     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  resume     Resume      @relation(fields: [resumeId], references: [id], onDelete: Restrict)
+  interviews Interview[]
+}
+
+model Interview {
+  id               String            @id @default(uuid())
+  time             DateTime
+  status           ApplicationStatus @default(INITIATED)
+  statusUpdateDate DateTime          @updatedAt
+  interviewers     String[]
+  location         String
+  isRemote         Boolean
+
+  positionId String
+  position   Position @relation(fields: [positionId], references: [id], onDelete: Cascade)
+}
